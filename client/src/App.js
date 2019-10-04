@@ -16,7 +16,7 @@ const App = () => {
       .catch(err => {
         alert(err.message);
       })
-  });
+  },[playerData]);
 
   return (
     <div className="App">
