@@ -28,7 +28,13 @@ class App extends React.Component {
         <h1>Women's World Cup</h1>
         {
           this.state.worldCupData.map(player => {
-            return <div>{player.name}</div>
+            return (
+              <div>
+                <p>Name: {player.name}</p>
+                <p>Country: {player.country}</p>
+                <p>Search Count: {player.searches}</p>
+              </div>
+            );
           })
         }
       </div>
