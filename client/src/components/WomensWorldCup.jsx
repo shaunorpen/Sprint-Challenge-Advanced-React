@@ -6,18 +6,12 @@ class WomensWorldCup extends React.Component {
   componentDidMount() {
     axios.get('http://localhost:5000/api/players')
       .then(res => {
-          this.props.setPlayerData(res.data);
+        this.props.setCountryList(res.data);
+        this.props.setPlayerData(res.data);
       })
       .catch(err => {
         console.log(err.message);
       });
-  }
-
-  countryList = (playerData) => {
-    const countries = playerData.map(player => player.country);
-    const uniqueCountries = countries.filter((country, index, arr) => arr.indexOf(country) === index);
-    const sortedUniqueCountries = uniqueCountries.sort();
-    return sortedUniqueCountries;
   }
 
   render() {
@@ -25,7 +19,7 @@ class WomensWorldCup extends React.Component {
       <>
         <h1>Women's World Cup</h1>
         <div className="App">
-          { this.countryList(this.props.playerData).map(country => 
+          { this.props.countryList.map(country => 
               <CountryCard 
                 country={country} 
                 key={country}
