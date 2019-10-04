@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import './App.css';
+import PlayerCard from './components/PlayerCard';
 
 class App extends React.Component {
   constructor(props) {
@@ -23,19 +24,12 @@ class App extends React.Component {
   }
 
   render() {
+
     return (
       <div className="App">
         <h1>Women's World Cup</h1>
         {
-          this.state.worldCupData.map(player => {
-            return (
-              <div>
-                <p>Name: {player.name}</p>
-                <p>Country: {player.country}</p>
-                <p>Search Count: {player.searches}</p>
-              </div>
-            );
-          })
+          this.state.worldCupData.map(player => <PlayerCard player={player} />)
         }
       </div>
     )
