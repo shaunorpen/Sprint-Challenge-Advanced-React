@@ -1,39 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
 import PlayerCard from './components/PlayerCard';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      worldCupData: [],
-    };
-  }
+import { usePlayerData } from './hooks/usePlayerData';
 
-  componentDidMount() {
+const App = () => {
+  const [playerData, setPlayerData] = usePlayerData();
+
+  useEffect(() => {
     axios.get('http://localhost:5000/api/players')
       .then(res => {
-        this.setState({
-          worldCupData: res.data
-        });
+        setPlayerData(res.data);
       })
       .catch(err => {
         alert(err.message);
       })
-  }
+  });
 
-  render() {
-
-    return (
-      <div className="App">
-        <h1>Women's World Cup</h1>
-        {
-          this.state.worldCupData.map(player => <PlayerCard player={player} />)
-        }
-      </div>
-    )
-  }
+  return (
+    <div className="App">
+      <h1>Women's World Cup</h1>
+      {
+        playerData.map(player => <PlayerCard player={player} />)
+      }
+    </div>
+  );
 }
 
 export default App;

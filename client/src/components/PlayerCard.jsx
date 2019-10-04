@@ -2,7 +2,6 @@ import React from 'react';
 
 export default class PlayerCard extends React.Component {
     render() {
-        debugger
         return (
             <div>
                 <p>Name: {this.props.player.name}</p>
