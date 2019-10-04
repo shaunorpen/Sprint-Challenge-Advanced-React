@@ -1,10 +1,7 @@
 import React from 'react';
 
-export default class PlayerCard extends React.Component {
-    render() {
-        debugger
-        return (
-            <li>{this.props.player.name}</li>
-        )
-    }
+export default function PlayerCard(props) {
+    return (
+        <li>{props.player.name}</li>
+    );
 }
