@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useLocalStorage } from './useLocalStorage';
 
-export const usePlayerData = () => {
-    const [playerData, setPlayerData] = useState([]);
+export const usePlayerData = (initialValue) => {
+    const [playerData, setPlayerData] = useLocalStorage('playerData', initialValue);
 
     return [playerData, setPlayerData];
 }

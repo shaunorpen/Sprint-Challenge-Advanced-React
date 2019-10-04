@@ -17,7 +17,7 @@ export default class CountryCard extends React.Component {
                           return 1;
                         }
                         return 0;
-                    }).map(player => <PlayerCard player={player} />)}
+                    }).map(player => <PlayerCard player={player} key={player.id} />)}
                 </ul>
             </div>
         );
