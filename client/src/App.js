@@ -1,30 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
-import PlayerCard from './components/PlayerCard';
 
-import { usePlayerData } from './hooks/usePlayerData';
+import { playerData } from './data/data';
+
+import CountryCard from './components/CountryCard';
 
 const App = () => {
-  const [playerData, setPlayerData] = usePlayerData();
+  
+  const countries = [];
 
-  useEffect(() => {
-    axios.get('http://localhost:5000/api/players')
-      .then(res => {
-        setPlayerData(res.data);
-      })
-      .catch(err => {
-        alert(err.message);
-      })
-  },[playerData]);
+  playerData.map(player => {
+    if (!countries.includes(player.country)) {
+      countries.push(player.country)
+    };
+  });
 
   return (
-    <div className="App">
+    <>
       <h1>Women's World Cup</h1>
-      {
-        playerData.map(player => <PlayerCard player={player} />)
-      }
-    </div>
+      <div className="App">
+        { countries.sort().map(
+            country => <CountryCard 
+              country={country} 
+              key={country}
+              players={playerData.filter(player => player.country === country)} 
+            />) 
+        }
+      </div>
+    </>
   );
 }
 
